@@ -1,0 +1,12 @@
+digraph C {
+graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.35, ranksep=0.4];
+node [shape=record, style="filled", fontname="Times New Roman", fontsize=10, color="#2F5597", fillcolor="#F7FBFF"];
+edge [fontname="Times New Roman", fontsize=9, color="#555555"];
+t [label="{BusinessTrip|+ MIN_REJECTION_REASON_LENGTH int = 10\l+ MAX_TRIP_DURATION_DAYS long = 35L\l- id String\l- employee Employee\l- start LocalDate\l- end LocalDate\l- status TripStatus\l- rejectionReason String\l|+ BusinessTrip(String,Employee,LocalDate,LocalDate)\l- validateDates(LocalDate,LocalDate) void\l+ submit() void\l+ approve() void\l+ reject(String) void\l+ cancel() void\l+ complete(LocalDate) void\l+ getStatus() TripStatus\l}", fillcolor="#F7FBFF", color="#2F5597"];
+st [label="{TripStatus||DRAFT\lSUBMITTED\lAPPROVED\lREJECTED\lCANCELLED\lCOMPLETED\l}", fillcolor="#F7FBFF", color="#2F5597"];
+emp [label="{Employee|- id String\l- fullName String\l|+ Employee(String,String)\l}", fillcolor="#F7FBFF", color="#2F5597"];
+sv [label="{BusinessTripService|- trips Map[String,BusinessTrip]\l|+ create(String,LocalDate,LocalDate) BusinessTrip\l+ create(String,Employee,LocalDate,LocalDate) BusinessTrip\l+ findByStatus(TripStatus) List[BusinessTrip]\l+ main(String[]) void\l}", fillcolor="#F7FBFF", color="#2F5597"];
+t -> st [label="1",style=dashed,arrowhead=open];
+t -> emp [label="1",style=dashed,arrowhead=open];
+sv -> t [label="manages",style=dashed,arrowhead=open];
+}

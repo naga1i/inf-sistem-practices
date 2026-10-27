@@ -1,0 +1,26 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.25, ranksep=0.35];
+node [shape=box, style="rounded,filled", fontname="Times New Roman", fontsize=11, color="#2F5597", fillcolor="#EAF2F8", margin="0.12,0.08"];
+edge [fontname="Times New Roman", fontsize=9, color="#555555"];
+start [label="Начало", shape=oval, fillcolor="#E2F0D9", color="#548235"];
+end [label="Завершение", shape=oval, fillcolor="#FCE4D6", color="#C65911"];
+n1 [label="Получить строку часов табеля (line)" ,shape=parallelogram,fillcolor="#E4DFEC",color="#7030A0"];
+n2 [label="Разделить строку на элементы: line.trim().split(\";\", -1)" ];
+n3 [label="Ровно пять значений (parts.length == 5)" ,shape=diamond,fillcolor="#FFF2CC",color="#BF9000"];
+n4 [label="A1: В цикле for (i = 0..4) выполнить Integer.parseInt и проверить 0 <= hours[i] <= 16 с указанием позиции (i + 1) при ошибке" ,fillcolor="#D5F5E3",color="#1E8449",style="rounded,filled"];
+n5 [label="Все элементы корректны" ,shape=diamond,fillcolor="#FFF2CC",color="#BF9000"];
+n6 [label="Вычислить сумму total, среднее average, дни переработки overtimeDays (>8 ч) и недельную переработку weeklyOvertime (норма 35 ч)" ];
+n7 [label="A2: Сформировать итоговый отчёт formatReport: сумма, среднее (%.2f), дни переработки и недельная переработка max(0, total - 35)" ,fillcolor="#D5F5E3",color="#1E8449",style="rounded,filled"];
+n8 [label="Сформировать сообщение об ошибке с указанием позиции" ];
+start -> n1;
+n1 -> n2;
+n2 -> n3;
+n3 -> n4 [label="да"];
+n3 -> n8 [label="нет"];
+n4 -> n5;
+n5 -> n6 [label="да"];
+n5 -> n8 [label="нет"];
+n6 -> n7;
+n7 -> end;
+n8 -> end;
+}

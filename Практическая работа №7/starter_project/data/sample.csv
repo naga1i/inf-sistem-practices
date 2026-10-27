@@ -1,0 +1,10 @@
+productId;name;price;quantity
+M01;Monitor 27;32990;2
+K01;Keyboard;4490;3
+M01;Monitor 27;32990;1
+M01;Monitor 27;32990;32
+M01;Monitor 27;32990;1
+H01;Headset;7500;100
+H02;Webcam;4500;0
+X01;Broken;-100;1
+;EmptyId;500;1

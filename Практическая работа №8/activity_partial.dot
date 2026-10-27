@@ -1,0 +1,24 @@
+digraph G {
+graph [rankdir=TB, bgcolor="white", pad=0.2, nodesep=0.25, ranksep=0.35];
+node [shape=box, style="rounded,filled", fontname="Times New Roman", fontsize=11, color="#2F5597", fillcolor="#EAF2F8", margin="0.12,0.08"];
+edge [fontname="Times New Roman", fontsize=9, color="#555555"];
+start [label="Начало", shape=oval, fillcolor="#E2F0D9", color="#548235"];
+end [label="Завершение", shape=oval, fillcolor="#FCE4D6", color="#C65911"];
+n1 [label="Получить команду: submit / approve / reject / cancel / complete" ,shape=parallelogram,fillcolor="#E4DFEC",color="#7030A0"];
+n2 [label="Определить текущий статус заявки (this.status)" ];
+n3 [label="A1: Проверить допустимость перехода из текущего статуса: submit из DRAFT; approve/reject из SUBMITTED; cancel из DRAFT/SUBMITTED/APPROVED; complete из APPROVED" ,fillcolor="#D5F5E3",color="#1E8449",style="rounded,filled"];
+n4 [label="Переход допустим" ,shape=diamond,fillcolor="#FFF2CC",color="#BF9000"];
+n5 [label="A2: Проверить данные операции: start <= end, длительность <= 35 дн. (вариант 6), reject reason.length >= 10, complete today.isAfter(end)" ,fillcolor="#D5F5E3",color="#1E8449",style="rounded,filled"];
+n6 [label="Изменить состояние заявки (this.status)" ];
+n7 [label="Выбросить IllegalStateException / IllegalArgumentException без изменения объекта" ];
+start -> n1;
+n1 -> n2;
+n2 -> n3;
+n3 -> n4;
+n4 -> n5 [label="да"];
+n4 -> n7 [label="нет"];
+n5 -> n6 [label="корректно"];
+n5 -> n7 [label="ошибка"];
+n6 -> end;
+n7 -> end;
+}
